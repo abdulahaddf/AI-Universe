@@ -26,6 +26,7 @@
         <h1 class="text-5xl font-bold my-5 bg-rose-600">AI Universe Hub</h1>
         <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Sort By Date</button>
       </div>
+      
     </header>
     <!-- maiin section -->
     <main>
@@ -36,7 +37,7 @@
 
       </section>
       <!-- spinner  -->
-      <div class="hidden" id="spinner">
+      <div class="hidden w-max mx-auto" id="spinner">
         <div class="loader"></div>
       </div>
       <!-- show all button -->
@@ -46,6 +47,18 @@
       
       
     </main>
+    <!-- The button to open modal -->
+
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my-modal-3" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box relative">
+    <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-1">✕</label>
+    <h3 class="text-lg font-bold">Congratulations random Internet user!</h3>
+    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+  </div>
+</div>
 
     <script src="js/ai.js"></script>
   </body>

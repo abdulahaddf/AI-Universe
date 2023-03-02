@@ -24,20 +24,26 @@ const displayData = (datas) => {
       <hr>
       <h2 class="card-title font-bold">${data.name}</h2>
       <div class="flex justify-between">
-        <div><i class="fa-solid fa-calendar-days"></i>${data.published_in}</div>
+        <div><i class="fa-solid fa-calendar-days mx-2"></i>${data.published_in}</div>
         <div>
-          <i class="fas fa-arrow-right"
-            onclick="fetchNewsDetail('')"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"></i>
+        <button onclick="document.getElementById('my-modal-3').checked = true;">
+        <i class="fa-solid fa-circle-arrow-right text-2xl"></i></button>
+
         </div>
       </div>
     </div>
   </div>
   
     `;
-    
+    spinner.classList.add('hidden')
   });
 };
 
+
+
+
+
+
+const spinner = document.getElementById('spinner');
+spinner.classList.remove('hidden')
 loadData();
