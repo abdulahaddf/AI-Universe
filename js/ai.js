@@ -6,7 +6,7 @@ const loadData = () => {
 const displayData = (datas) => {
   const cardContainer = document.getElementById("card-container");
   datas.forEach((data) => {
-    console.log(data.features.length);
+    console.log(data.id);
     cardContainer.innerHTML += `
     <div class="card w-96 bg-base-100 shadow-xl">
     <figure>
@@ -26,7 +26,7 @@ const displayData = (datas) => {
       <div class="flex justify-between">
         <div><i class="fa-solid fa-calendar-days mx-2"></i>${data.published_in}</div>
         <div>
-        <button onclick="document.getElementById('my-modal-3').checked = true;">
+        <button onclick="loadModal('${data.id}') ">
         <i class="fa-solid fa-circle-arrow-right text-2xl"></i></button>
 
         </div>
@@ -39,7 +39,18 @@ const displayData = (datas) => {
   });
 };
 
+const loadModal = (id) => {
+    const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    fetch (url)
+    .then((response) => response.json())
+    .then((data) => modalContent(data.data));
+    document.getElementById('my-modal-3').checked = true;
+};
+const modalContent = (data) =>{
+console.log(data.description);
+// const modalContainer = document.getElementById('modal-container');
 
+};
 
 
 
