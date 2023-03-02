@@ -6,7 +6,7 @@ const loadData = () => {
 const displayData = (datas) => {
   const cardContainer = document.getElementById("card-container");
   datas.forEach((data) => {
-    console.log(data.name);
+    console.log(data.features.length);
     cardContainer.innerHTML += `
     <div class="card w-96 bg-base-100 shadow-xl">
     <figure>
@@ -34,7 +34,9 @@ const displayData = (datas) => {
       </div>
     </div>
   </div>
+  
     `;
+    
   });
 };
 
