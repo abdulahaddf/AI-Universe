@@ -12,8 +12,7 @@ const displayData = (datas) => {
     <figure>
       <img
         src="${data.image}"
-        alt="Shoes"
-      />
+        alt="Shoes"/>
     </figure>
     <div class="card-body">
       <p class="text-xl font-bold">Features</p>
@@ -27,12 +26,10 @@ const displayData = (datas) => {
       <div class="flex justify-between">
         <div><i class="fa-solid fa-calendar-days"></i>${data.published_in}</div>
         <div>
-          <i
-            class="fas fa-arrow-right"
+          <i class="fas fa-arrow-right"
             onclick="fetchNewsDetail('')"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          ></i>
+            data-bs-target="#exampleModal"></i>
         </div>
       </div>
     </div>
