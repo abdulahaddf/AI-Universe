@@ -54,28 +54,26 @@ const loadModal = (id) => {
 };
 
 const modalContent = (data) => {
-  console.log(data.pricing);
+  // console.log(data.pricing);
 
   document.getElementById("description").innerText = data.description;
   document.getElementById("price1").innerText = `${
-    data.pricing && data.pricing[0]
-      ? `${data.pricing[0].price}/${data.pricing[0].plan}`
-      : "Free of Cost"
-  }`;
+    data.pricing && data.pricing[0] ? `${data.pricing[0].price}/${data.pricing[0].plan}`
+      : "Free of Cost / Basic " } `;
   document.getElementById("price2").innerText = `${
     data.pricing && data.pricing[1]
       ? `${data.pricing[1].price}/${data.pricing[1].plan}`
-      : "Free of Cost"
+      : "Free of Cost /Pro "
   }`;
   document.getElementById("price3").innerText = `${
     data.pricing && data.pricing[2]
       ? `${data.pricing[2].price}/${data.pricing[2].plan}`
-      : "Free of Cost"
+      : "Free of Cost / Enterprise "
   }`;
   document.getElementById("features").innerText = `${
     data.features && data.features[0]
       ? data.features[0].feature_name
-      : "No data found"
+      : ""
   } ${
     data.features && data.features[1]
       ? "\n" + data.features[1].feature_name
@@ -89,14 +87,14 @@ const modalContent = (data) => {
   document.getElementById("intg").innerText = `${
     data.integrations && data.integrations[0]
       ? data.integrations[0]
-      : "No data found"
+      : "No data Found"
   }${
     data.integrations && data.integrations[1]
-      ? ", " + data.integrations[1]
+      ? "\n " + data.integrations[1]
       : ""
   }${
     data.integrations && data.integrations[2]
-      ? ", " + data.integrations[2]
+      ? "\n" + data.integrations[2]
       : ""
   }`;
 
@@ -107,17 +105,24 @@ const modalContent = (data) => {
   const hideAccuracyBtn = accuracyScore === 0;
 
   imgContainer.innerHTML += `
-    <div class="relative"><img class="" src="${data.image_link[0]}" alt="https://itchronicles.com/wp-content/uploads/2020/09/How-Facebook-uses-Artificial-intelligence-1024x576.jpg">
+    <div class="relative"><img class="" src="${data.image_link[0]}" alt="">
       <div class ="absolute right-2 top-1 id="accuracyBtn">
         <button class="btn btn-xs ${hideAccuracyBtn ? "hidden" : ""}">${accuracyScore}% accuracy</button>
       </div>
     </div>
     <div>
-      <h3 class="text-xl font-bold">${data.input_output_examples[0].input}</h3>
-      <p>${data.input_output_examples[0].output}</p>
+      <h3 class="text-xl font-bold">${data.input_output_examples && data.input_output_examples[0] && data.input_output_examples[0].input ? data.input_output_examples[0].input : "Can you give any Example?"}</h3>
+      
+      <p>${data.input_output_examples && data.input_output_examples[0] && data.input_output_examples[0].output ? data.input_output_examples[0].output : "No! Not Yet Take a break"}</p>
     </div>
   `;
 };
+
+
+
+
+
+
 
 const showAll = () => {
   fetch("https://openapi.programming-hero.com/api/ai/tools")
@@ -125,6 +130,41 @@ const showAll = () => {
   .then((data) => displayData(data.data.tools));
 
 }
+
+const sortButton = document.getElementById('sort');
+sortButton.addEventListener('click', sortByDate());
+
+function sortByDate() {
+
+  
+  // Retrieve the card container element
+  const cardContainer = document.getElementById("card-container");
+
+  // Retrieve all the cards inside the container
+  const cards = Array.from(cardContainer.children);
+
+  // Sort the cards by date using the map() method
+  const sortedCards = cards
+    .map((card) => ({
+      element: card,
+      date: new Date(card.dataset.publishedIn),
+    }))
+    .sort((a, b) => b.date - a.date)
+    .map((card) => card.element);
+
+  // Remove all the cards from the container
+  cardContainer.innerHTML = "";
+
+  // Append the sorted cards to the container
+  sortedCards.forEach((card) => {
+    cardContainer.appendChild(card);
+  });
+}
+
+
+
+
+
 
 
 
