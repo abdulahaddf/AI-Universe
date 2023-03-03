@@ -1,10 +1,15 @@
 const loadData = () => {
   fetch("https://openapi.programming-hero.com/api/ai/tools")
     .then((response) => response.json())
-    .then((data) => displayData(data.data.tools));
+    .then((data) => {
+      const slicedData = data.data.tools.slice(0, 6); // slice the first 6 items
+      displayData(slicedData);
+    });
 };
 const displayData = (datas) => {
+  // const datas = datass.slice(0, 6);
   const cardContainer = document.getElementById("card-container");
+  cardContainer.innerHTML = "";
   datas.forEach((data) => {
     // console.log(data.features);
     cardContainer.innerHTML += `
@@ -19,7 +24,7 @@ const displayData = (datas) => {
       <ul>
         <li>1.${data.features[0]}</li>
         <li>2.${data.features[1]}</li>
-        <li>3.${data.features[2]}</li>
+        <li>3.${data.features[2] ?  data.features[2] : ""  } </li>  
       </ul>
       <hr>
       <h2 class="card-title font-bold">${data.name}</h2>
@@ -40,47 +45,86 @@ const displayData = (datas) => {
 };
 
 const loadModal = (id) => {
-    const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
-    fetch (url)
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+  fetch(url)
     .then((response) => response.json())
-    .then((data) => modalContent(data.data));
-    document.getElementById('my-modal-3').checked = true;
+    .then((data) => modalContent(data.data))
+    .catch((error) => console.log(error));
+  document.getElementById("my-modal-3").checked = true;
 };
-const modalContent = (data) =>{
-console.log(data.input_output_examples[0].input
-    );
 
-document.getElementById('description').innerText = data.description;
-document.getElementById('price1').innerText = `${data.pricing[0].price}
-${data.pricing[0].plan}`;
-document.getElementById('price2').innerText = `${data.pricing[1].price}
-${data.pricing[1].plan}`;
-document.getElementById('price3').innerText = `${data.pricing[2].price}
-${data.pricing[2].plan}`;
-document.getElementById('features').innerText= `${data.features[1].feature_name}
-${data.features[2].feature_name}
-${data.features[3].feature_name}
-`;
-document.getElementById('intg').innerText= `
-${data.integrations[0]}
-${data.integrations[1]}
-${data.integrations[2]}
-`;
-const imgContainter = document.getElementById('img-container');
-imgContainter.innerHTML = "";
-imgContainter.innerHTML += `
-<div class="relative"><img src="${data.image_link[0]}" alt="">
-<div class ="absolute right-2 top-1"><button class="btn  btn-xs ">${data.accuracy.score*100}%accuracy</button></div></div>
-            <div>
-            <h3 class="text-xl font-bold">${data.input_output_examples[0].input}</h3>
-            <p>${data.input_output_examples[0].output}</p>
-            
-            </div>
-`;
+const modalContent = (data) => {
+  console.log(data.pricing);
 
+  document.getElementById("description").innerText = data.description;
+  document.getElementById("price1").innerText = `${
+    data.pricing && data.pricing[0]
+      ? `${data.pricing[0].price}/${data.pricing[0].plan}`
+      : "Free of Cost"
+  }`;
+  document.getElementById("price2").innerText = `${
+    data.pricing && data.pricing[1]
+      ? `${data.pricing[1].price}/${data.pricing[1].plan}`
+      : "Free of Cost"
+  }`;
+  document.getElementById("price3").innerText = `${
+    data.pricing && data.pricing[2]
+      ? `${data.pricing[2].price}/${data.pricing[2].plan}`
+      : "Free of Cost"
+  }`;
+  document.getElementById("features").innerText = `${
+    data.features && data.features[0]
+      ? data.features[0].feature_name
+      : "No data found"
+  } ${
+    data.features && data.features[1]
+      ? "\n" + data.features[1].feature_name
+      : ""
+  } ${
+    data.features && data.features[2]
+      ? "\n" + data.features[2].feature_name
+      : ""
+  }`;
 
+  document.getElementById("intg").innerText = `${
+    data.integrations && data.integrations[0]
+      ? data.integrations[0]
+      : "No data found"
+  }${
+    data.integrations && data.integrations[1]
+      ? ", " + data.integrations[1]
+      : ""
+  }${
+    data.integrations && data.integrations[2]
+      ? ", " + data.integrations[2]
+      : ""
+  }`;
 
+  const imgContainer = document.getElementById("img-container");
+  imgContainer.innerHTML = "";
+
+  const accuracyScore = data.accuracy.score * 100;
+  const hideAccuracyBtn = accuracyScore === 0;
+
+  imgContainer.innerHTML += `
+    <div class="relative"><img class="" src="${data.image_link[0]}" alt="https://itchronicles.com/wp-content/uploads/2020/09/How-Facebook-uses-Artificial-intelligence-1024x576.jpg">
+      <div class ="absolute right-2 top-1 id="accuracyBtn">
+        <button class="btn btn-xs ${hideAccuracyBtn ? "hidden" : ""}">${accuracyScore}% accuracy</button>
+      </div>
+    </div>
+    <div>
+      <h3 class="text-xl font-bold">${data.input_output_examples[0].input}</h3>
+      <p>${data.input_output_examples[0].output}</p>
+    </div>
+  `;
 };
+
+const showAll = () => {
+  fetch("https://openapi.programming-hero.com/api/ai/tools")
+  .then((response) => response.json())
+  .then((data) => displayData(data.data.tools));
+
+}
 
 
 

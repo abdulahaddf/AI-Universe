@@ -16,14 +16,15 @@
       rel="stylesheet"
       type="text/css"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/a07c5497d4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style/style.css">
   </head>
-  <body>
+  <body >
     <!-- header -->
     <header>
       <div class="container mx-auto text-center">
-        <h1 class="text-5xl font-bold my-5 bg-rose-600">AI Universe Hub</h1>
+        <h1 class="text-5xl font-bold my-5 ">AI Universe Hub</h1>
         <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Sort By Date</button>
       </div>
       <!-- <button class="btn btn-xs ">span</button> -->
@@ -42,7 +43,7 @@
       </div>
       <!-- show all button -->
       <div class="w-max mx-auto" >
-        <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Show All</button>
+        <button onclick="showAll()" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Show All</button>
       </div>
       
       
@@ -51,43 +52,40 @@
 
 
 <!-- Modal container -->
-<section>
+
     
-    <section id="modal-container">
-        <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-<div class="modal">
-  <div class="modal-box relative">
-    <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-1">✕</label>
-    <div class="flex gap-3">
-        <div>
-            <div id="description"></div>
+<section id="modal-container">
+    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+    <div class="modal border-4 ">
+      <div class="modal-box relative overflow-visible bg-{#FEF7F7}">
+        <label for="my-modal-3" class="btn btn-sm btn-circle absolute -right-2 -top-2 z-10">✕</label>
+        <div class="flex gap-3">
+          <div>
+            <div id="description" class="mb-2 font-bold text-lg"></div>
+            <div class="flex gap-3  rounded-lg bg-white my-10">
+              <div id="price1" class="font-semibold border-4 p-2 rounded-xl text-green-500 "></div>
+              <div id="price2" class="font-semibold border-4 p-2 rounded-xl text-orange-500"></div>
+              <div id="price3" class="font-semibold border-4 p-2 rounded-xl text-red-600 "></div>
+            </div> 
             <div class="flex gap-3">
-                <div id="price1">b</div>
-                <div id="price2">p</div>
-                <div id="price3">e</div>
+              <div>
+                <h3 class="font-bold text-2xl">Features</h3>
+                <div id="features" class="list-disc pl-4"></div>
+              </div>
+              <div>
+                <h3 class="font-bold text-2xl">Integration</h3>
+                <div id="intg" class="list-disc pl-4"></div>
+              </div>
             </div>
-            <div class="flex gap-3">
-                <div><h3>Features</h3>
-                    <div id="features">
-
-                    </div>
-                </div>
-                <div><h3>Integration</h3>
-                    <div id="intg">
-
-                    </div>
-                </div>
-            </div>
+          </div>
+          <div id="img-container" class="text-center"></div>
         </div>
-        <div id="img-container">
-            
-        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
+  
+  
 
-    </section>
-</section>
 
 
 
