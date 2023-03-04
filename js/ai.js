@@ -112,17 +112,13 @@ const modalContent = (data) => {
     </div>
     <div>
       <h3 class="text-xl font-bold">${data.input_output_examples && data.input_output_examples[0] && data.input_output_examples[0].input ? data.input_output_examples[0].input : "Can you give any Example?"}</h3>
-      
+
       <p>${data.input_output_examples && data.input_output_examples[0] && data.input_output_examples[0].output ? data.input_output_examples[0].output : "No! Not Yet Take a break"}</p>
     </div>
   `;
 };
 
-
-
-
-
-
+// showing all data
 
 const showAll = () => {
   fetch("https://openapi.programming-hero.com/api/ai/tools")
@@ -130,44 +126,21 @@ const showAll = () => {
   .then((data) => displayData(data.data.tools));
 
 }
+// sorting by date
 
-const sortButton = document.getElementById('sort');
-sortButton.addEventListener('click', sortByDate());
+const loadDataBYdate = () => {
+  fetch("https://openapi.programming-hero.com/api/ai/tools")
+    .then((response) => response.json())
+    .then((data) => {
+      
+      const displayDataBydates  =  data.data.tools;
+      displayDataBydates.sort((a,b) => new Date(b.published_in) - new Date(a.published_in));
+      displayData(displayDataBydates);
+     
+    })
 
-function sortByDate() {
-
-  
-  // Retrieve the card container element
-  const cardContainer = document.getElementById("card-container");
-
-  // Retrieve all the cards inside the container
-  const cards = Array.from(cardContainer.children);
-
-  // Sort the cards by date using the map() method
-  const sortedCards = cards
-    .map((card) => ({
-      element: card,
-      date: new Date(card.dataset.publishedIn),
-    }))
-    .sort((a, b) => b.date - a.date)
-    .map((card) => card.element);
-
-  // Remove all the cards from the container
-  cardContainer.innerHTML = "";
-
-  // Append the sorted cards to the container
-  sortedCards.forEach((card) => {
-    cardContainer.appendChild(card);
-  });
-}
-
-
-
-
-
-
-
-
+  }
+    
 
 const spinner = document.getElementById('spinner');
 spinner.classList.remove('hidden')
