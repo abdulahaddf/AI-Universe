@@ -113,7 +113,7 @@ const modalContent = (data) => {
       </div>
     </div>
     <div>
-      <h3 class="text-xl font-bold">${
+      <h3 class="text-lg md:text-xl font-bold">${
         data.input_output_examples &&
         data.input_output_examples[0] &&
         data.input_output_examples[0].input
@@ -121,7 +121,7 @@ const modalContent = (data) => {
           : "Can you give any Example?"
       }</h3>
 
-      <p>${
+      <p class="text-sm md:text-lg">${
         data.input_output_examples &&
         data.input_output_examples[0] &&
         data.input_output_examples[0].output
