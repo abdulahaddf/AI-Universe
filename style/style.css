@@ -19,13 +19,15 @@
           100% { transform: rotate(360deg); }
         }
         .modal-box {
-          max-width: 850px; 
+          max-width: 950px; 
           width: 90%; 
           margin: 0 auto; 
           padding: 50;
-          
+         
         } 
       .FeaInt{
         background-color: #FEF7F7;
         padding: 20px;
+        border-radius: 20px;
+      
       }
